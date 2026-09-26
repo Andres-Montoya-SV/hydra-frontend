@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.env*
+!.env.example
+vendor/hydra-ui/dist/
+playwright-report/
+test-results/
+*.tsbuildinfo
