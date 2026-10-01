@@ -1,5 +1,7 @@
 # Procedencia
 
-Fuentes sin modificar de https://github.com/Andres-Montoya-SV/hydra-styling, commit `72cd6c2f4f7c3e2943a01df3dedefa31f78bc16d`, `packages/ui/src` (sin tests). Licencia MIT adjunta. package.json es un adaptador local de exports para Next.js; CSS se compila con Tailwind.
+Fuentes sin modificar de https://github.com/Andres-Montoya-SV/hydra-styling, commit `f6c3db13ce372de2d61dd7806f036ae104d9c72c`, `packages/ui/src` (sin tests). Licencia MIT y avisos adjuntos. `package.json` adapta los exports de fuentes para Next.js; el CSS se compila con Tailwind.
 
-Actualizar descargando una revisión explícita y comparando las fuentes. No editar este snapshot para personalizar la app: usar src/components y src/app/globals.css. Cuando exista un release npm oficial, reemplazar el workspace con una dependencia exacta después de validar compatibilidad.
+Esta revisión incorpora Vitral, temas, densidades, localización EN/ES/PT-BR y feedback. El adaptador local usa la versión `0.1.0-vitral.f6c3db1` para identificar este snapshot; no es una publicación en npm. Firebase es un peer opcional; la aplicación no importa su adaptador ni necesita un motor de animaciones.
+
+Actualizar desde una revisión explícita y comparar las fuentes. Personalizar la app en `src/`, sin editar este snapshot. Reemplazar el workspace por una versión exacta del paquete oficial cuando exista una publicación validada.

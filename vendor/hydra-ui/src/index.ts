@@ -7,9 +7,9 @@ export {validateAssetGraph,type AssetLayout,type AssetPosition} from './lib/asse
 export {AssetMap,type AssetMapProps,type MapAsset,type MapRelation,type AssetKind} from './components/asset-map';
 export {MotionProvider,Motion,useHydraMotion} from './components/motion';
 export {Footer,type FooterProps,type FooterVariant} from './components/footer';
-export {HydraIcon, PasswordInput, RangeInput, FileInput, RadioGroup, AssetRelations, type HydraIconName, type AssetNode} from './components/extended';
+export {HydraIcon, PasswordInput, RangeInput, FileInput, RadioGroup, AssetRelations, type PasswordInputProps, type HydraIconName, type AssetNode} from './components/extended';
 export { Button, buttonVariants, type ButtonProps } from "./components/button";
-export { Field, Input, Select, Textarea, type FieldProps } from "./components/field";
+export { Field, Input, Select, Textarea, useFieldControl, type FieldProps, type FieldControlOptions, type InputProps, type SelectProps, type TextareaProps } from "./components/field";
 export { Checkbox, Switch } from "./components/choice";
 export { Card, CardHeader, CardTitle, CardContent, CardFooter, type CardProps } from "./components/card";
 export { Badge, type BadgeProps } from "./components/badge";
@@ -18,5 +18,25 @@ export { Stat, type StatProps } from "./components/stat";
 export { DocumentCard, type DocumentCardProps, type DocumentKind } from "./components/document-card";
 export { HydraMark, FolkSun, type HydraMarkProps } from "./components/hydra-mark";
 export {OceanBackground, SiteLoader} from './components/ocean';
+export {RoseWindow, VitralBackdrop, VitralBackground} from './components/vitral';
+export {ThemeProvider, ThemeToggle, useHydraTheme, resolveHydraTheme, type HydraTheme, type HydraThemeInput} from './components/theme';
 
 export {ErrorBoundary} from './components/error-boundary';
+
+export {layoutAssetGraph} from './lib/graph-layout';
+
+export {Modal, Drawer, Dropdown, Fab, Tooltip, Toast, type ModalProps, type DropdownItem, type ToastProps} from './components/catalog-overlays';
+export {Link, Breadcrumbs, Menu, Dock, Navbar, MegaMenu, Pagination, Steps, Tabs, type NavigationItem, type TabItem} from './components/catalog-navigation';
+export {Collapse, Accordion, Avatar, Aura, Kbd, List, Table, Status, ChatBubble, Countdown, Timeline, Loading, RadialProgress, Skeleton, Carousel, HoverGallery, HoverCard, Diff, TextRotate, type GalleryItem} from './components/catalog-display';
+export {Fieldset, Label, Radio, Filter, Rating, OtpInput, Validator, Swap, ThemeController, Calendar, type CalendarProps} from './components/catalog-input';
+export {Divider, Hero, Indicator, Join, Mask, Stack, BrowserMockup, CodeMockup, PhoneMockup, WindowMockup} from './components/catalog-layout';
+
+export {DensityProvider, type DensityProviderProps, type HydraDensity, type ControlSize} from "./components/density";
+export type {FloatingPlacement} from "./lib/floating-position";
+export {Combobox, MultiSelect, type ComboboxProps, type MultiSelectProps, type SelectOption} from "./components/data-select";
+export {TagsInput, type TagsInputProps} from "./components/tags-input";
+export {DateRangePicker, type DateRangeValue, type DateRangePickerProps} from "./components/date-range-picker";
+export {DataTable, type DataColumn, type DataSorting, type DataTableProps} from "./components/data-table";
+export {LocaleProvider, useHydraLocale, enMessages, esMessages, ptBRMessages, type HydraMessages, type HydraLocale, type LocaleProviderProps} from "./components/locale";
+export {Snackbar, NotificationProvider, useNotifications, type SnackbarProps, type NotificationTone, type NotificationAction, type NotificationOptions, type Notifications, type NotificationProviderProps} from "./components/notifications";
+export {AlertDialog, Popover, type AlertDialogProps, type PopoverProps} from "./components/application-overlays";

@@ -1,6 +1,8 @@
 # Hydra Frontend
 
-Next.js App Router + TypeScript, construido sobre Hydra UI. Interfaz en español, responsive, sin datos ficticios en producción.
+Next.js App Router + TypeScript, construido sobre Hydra UI Vitral. Landing pública y consola de Hydra en **hydra.boqueronlabs.com**; **boqueronlabs.com** es el sitio corporativo independiente.
+
+La portada está disponible en español (`/`), inglés (`/?lang=en`) y portugués de Brasil (`/?lang=pt-BR`), con temas claro/oscuro y movimiento reducido. El vitral y su grafo de puntos son una ilustración identificada como tal; no representan activos de una cuenta. La consola conserva datos reales y su interfaz en español.
 
 ## Ejecutar
 
@@ -14,7 +16,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-El backend Hydra debe estar activo. Inicia sesión con una API key de la cuenta. No introduzcas una clave global compartida: cada sesión utiliza la clave de su propia cuenta. Ninguna variable de autenticación lleva el prefijo NEXT_PUBLIC_.
+La landing funciona sin backend ni sesión. Para entrar a la consola, el backend Hydra debe estar activo: inicia sesión con una API key de la cuenta. No introduzcas una clave global compartida: cada sesión utiliza la clave de su propia cuenta. Ninguna variable de autenticación lleva el prefijo NEXT_PUBLIC_.
 
 ```bash
 npm run check
@@ -34,11 +36,11 @@ npm start
 - Reportes: evidencia JSON y generación/descarga Markdown sin ejecutar HTML.
 - Ajustes: verificación de correo, identidad de reportes y consulta de webhooks.
 
-La API actual no ofrece listados de scans/dominios ni endpoints públicos del inventario consolidado. Conserva los IDs de los escaneos. No se inventan conteos de assets ni gráficos de riesgo. Login de contraseña, invitaciones, edición de perfil, eliminación de cuenta, registro web y administración de usuarios están pendientes de contratos seguros del backend.
+Esta consola implementa el subconjunto de contratos documentado en [docs/contracts.md](docs/contracts.md). Aún no integra listados paginados, inventario consolidado, organizaciones/roles, registro web ni login por contraseña; esto describe el alcance del frontend, no la ausencia de esas capacidades en el backend actual. Conserva los IDs de los escaneos. No se inventan conteos de assets ni gráficos de riesgo.
 
 ## Integración y seguridad
 
-Lee [docs/architecture.md](docs/architecture.md), [docs/contracts.md](docs/contracts.md) y [SECURITY.md](SECURITY.md).
+Lee [docs/architecture.md](docs/architecture.md), [docs/deployment.md](docs/deployment.md), [docs/contracts.md](docs/contracts.md) y [SECURITY.md](SECURITY.md).
 
 Hydra UI todavía no está publicado en npm: `vendor/hydra-ui` contiene fuentes originales fijadas al commit documentado en [UPSTREAM.md](vendor/hydra-ui/UPSTREAM.md). Es un workspace local, no una dependencia flotante de GitHub. Se puede reemplazar por el paquete oficial al publicarse. No se incluyeron modificaciones locales pendientes de hydra-styling.
 

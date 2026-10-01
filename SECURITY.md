@@ -3,6 +3,7 @@
 No publiques API keys, SESSION_SECRET ni reportes privados en issues. Reporta vulnerabilidades por el canal privado del propietario del repositorio.
 
 - Sesión cifrada y HttpOnly; autorización real en Hydra.
+- Cookie de producción `__Host-` sin dominio compartido y CSP con nonce por documento.
 - Validación de comandos, origen exacto, timeout, no-store, rechazo de redirects.
 - Sin escaneo automático ni promoción implícita de candidatos.
 - Dependencias exactas, lockfile, npm ci --ignore-scripts, auditoría y Actions fijadas por SHA.

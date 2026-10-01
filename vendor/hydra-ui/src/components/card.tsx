@@ -1,7 +1,6 @@
-import { forwardRef, useEffect, useImperativeHandle, type HTMLAttributes } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";
-import {useAnimate} from 'framer-motion';
 import {useHydraMotion} from './motion';
 
 const cardVariants = cva("hydra-card", {
@@ -18,19 +17,15 @@ const cardVariants = cva("hydra-card", {
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, variant, onPointerEnter, onPointerLeave, ...props }, ref) => {
+export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, variant, ...props }, ref) => {
   const active=useHydraMotion();
-  const [scope,animate]=useAnimate<HTMLDivElement>();
-  useImperativeHandle(ref,()=>scope.current!,[scope]);
-  useEffect(()=>{if(!active&&scope.current)void animate(scope.current,{y:0},{duration:0});},[active,animate,scope]);
-  return <div ref={scope} className={cn(cardVariants({variant}),'hydra-card-float',className)} {...props}
-    onPointerEnter={event=>{onPointerEnter?.(event);if(active&&event.pointerType==='mouse')void animate(scope.current,{y:-4},{type:'spring',stiffness:220,damping:24});}}
-    onPointerLeave={event=>{onPointerLeave?.(event);if(active)void animate(scope.current,{y:0},{type:'spring',stiffness:220,damping:24});}}/>;
+  return <div ref={ref} className={cn(cardVariants({variant}),'hydra-card-float',className)} {...props}
+    data-hydra-card-motion={active?'on':'off'}/>;
 });
 Card.displayName = "Card";
 
 export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex items-start justify-between gap-4 border-b border-hydra-line px-5 py-4", className)} {...props} />
+  <div ref={ref} className={cn("hydra-card-header flex items-start justify-between gap-4 border-b border-hydra-line", className)} {...props} />
 ));
 CardHeader.displayName = "CardHeader";
 
@@ -40,11 +35,11 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadi
 CardTitle.displayName = "CardTitle";
 
 export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-5", className)} {...props} />
+  <div ref={ref} className={cn("hydra-card-content", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
 export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex items-center gap-3 border-t border-hydra-line px-5 py-4", className)} {...props} />
+  <div ref={ref} className={cn("hydra-card-footer flex items-center gap-3 border-t border-hydra-line", className)} {...props} />
 ));
 CardFooter.displayName = "CardFooter";
