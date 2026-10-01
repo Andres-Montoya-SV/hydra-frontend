@@ -1,6 +1,17 @@
 import { EncryptJWT, jwtDecrypt } from "jose";
 import { createHash } from "node:crypto";
-export const COOKIE = "hydra_session";
+export function sessionCookieName(production: boolean) {
+  return production ? "__Host-hydra_session" : "hydra_session";
+}
+export const COOKIE = sessionCookieName(process.env.NODE_ENV === "production");
+export function sessionCookieOptions() {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict" as const,
+    path: "/",
+  };
+}
 function key(secret: string) {
   if (secret.length < 32)
     throw new Error("SESSION_SECRET must contain at least 32 characters");

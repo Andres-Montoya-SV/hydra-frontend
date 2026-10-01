@@ -1,20 +1,29 @@
 {
   "name": "@hydra-security/ui",
-  "version": "0.1.0",
+  "version": "0.1.0-vitral.f6c3db1",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
     "./hydra": "./src/hydra.ts",
+    "./firebase": "./src/firebase.ts",
     "./styles.css": "./dist/styles.css"
   },
   "dependencies": {
-    "animejs": "4.5.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
-    "firebase": "12.19.0",
-    "framer-motion": "13.4.1",
+    "d3-force": "3.0.0",
     "tailwind-merge": "3.7.0",
     "zod": "4.6.5"
+  },
+  "peerDependencies": {
+    "firebase": ">=12.19.0 <13",
+    "react": ">=18.3 <20",
+    "react-dom": ">=18.3 <20"
+  },
+  "peerDependenciesMeta": {
+    "firebase": {
+      "optional": true
+    }
   }
 }

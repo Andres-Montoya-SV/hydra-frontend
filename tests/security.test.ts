@@ -133,3 +133,44 @@ test("incompatible upstream data cannot become dashboard metrics", () => {
     ),
   );
 });
+
+import { contentSecurityPolicy } from "../src/lib/browser-policy";
+import { sessionCookieName } from "../src/lib/security";
+test("a sibling marketing origin cannot authorize an application mutation", () => {
+  assert(
+    !sameOrigin(
+      new Request("https://hydra.boqueronlabs.com/api/command", {
+        headers: { origin: "https://boqueronlabs.com" },
+      }),
+      "https://hydra.boqueronlabs.com",
+    ),
+  );
+  assert(
+    !sameOrigin(
+      new Request("https://hydra.boqueronlabs.com/api/session", {
+        headers: { origin: "https://other.boqueronlabs.com" },
+      }),
+      "https://hydra.boqueronlabs.com",
+    ),
+  );
+});
+test("production cookie uses browser-enforced host scope", () => {
+  assert.equal(sessionCookieName(true), "__Host-hydra_session");
+  assert.equal(sessionCookieName(false), "hydra_session");
+});
+test("production CSP rejects inline scripts, handlers, eval and external connections", () => {
+  const csp = contentSecurityPolicy("u8wBYRhIT3psNJMDhMIang==");
+  const script = csp.split("; ").find((d) => d.startsWith("script-src "))!;
+  assert(!script.includes("unsafe-inline"));
+  assert(!script.includes("unsafe-eval"));
+  assert(csp.includes("script-src-attr 'none'"));
+  assert(csp.includes("connect-src 'self';"));
+  assert(csp.includes("frame-ancestors 'none'"));
+  assert(csp.includes("upgrade-insecure-requests"));
+  assert(
+    !contentSecurityPolicy("u8wBYRhIT3psNJMDhMIang==", true, false).includes(
+      "upgrade-insecure-requests",
+    ),
+  );
+  assert.throws(() => contentSecurityPolicy("bad'; script-src *"));
+});

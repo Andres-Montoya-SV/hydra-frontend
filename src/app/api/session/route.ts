@@ -2,7 +2,13 @@ import { readBounded, PayloadTooLarge } from "@/lib/limits";
 import { subscription } from "@/lib/responses";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { COOKIE, seal, sameOrigin, validApiKey } from "@/lib/security";
+import {
+  COOKIE,
+  seal,
+  sameOrigin,
+  validApiKey,
+  sessionCookieOptions,
+} from "@/lib/security";
 import { upstream, messages } from "@/lib/upstream";
 export async function POST(req: Request) {
   if (!sameOrigin(req, process.env.APP_ORIGIN ?? "http://localhost:3000"))
@@ -22,10 +28,7 @@ export async function POST(req: Request) {
     subscription.parse(JSON.parse(await readBounded(check.body, 16384)));
     const token = await seal(apiKey, process.env.SESSION_SECRET ?? "");
     (await cookies()).set(COOKIE, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
+      ...sessionCookieOptions(),
       maxAge: 28800,
     });
     return NextResponse.json(
@@ -47,6 +50,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   if (!sameOrigin(req, process.env.APP_ORIGIN ?? "http://localhost:3000"))
     return new Response(null, { status: 403 });
-  (await cookies()).delete(COOKIE);
+  // A __Host- cookie must also be expired with Secure and Path=/.
+  (await cookies()).set(COOKIE, "", { ...sessionCookieOptions(), maxAge: 0 });
   return new Response(null, { status: 204 });
 }

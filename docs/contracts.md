@@ -2,6 +2,8 @@
 
 Fuente: Andres-Montoya-SV/hydra, commit `35749f6cec830315840d20da2185ccce2ccd83ec`, archivos api/auth.py, api/schemas.py y api/routers/*.py.
 
+Este es el snapshot de integración de la consola existente. La landing no cambia estos contratos. No constituye un inventario exhaustivo del backend actual ni sustituye una validación de staging contra la versión que se vaya a desplegar.
+
 | Vista            | Endpoint upstream                             |
 | ---------------- | --------------------------------------------- |
 | Login / panorama | GET /account/subscription                     |

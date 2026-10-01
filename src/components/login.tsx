@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Button,
   Input,
@@ -17,12 +18,14 @@ export function Login() {
       <OceanBackground />
       <main className="login">
         <section className="login-story">
-          <HydraMark width={72} />
+          <Link href="/" aria-label="Hydra — Boqueron Labs">
+            <HydraMark width={72} />
+          </Link>
           <p className="eyebrow">HYDRA SECURITY / EASM</p>
           <h1>
-            Lo que no ves
+            Una perspectiva clara.
             <br />
-            también te pertenece.
+            Un alcance definido.
           </h1>
           <p>
             Una perspectiva clara de tu superficie de ataque. Del descubrimiento
@@ -91,11 +94,13 @@ export function Login() {
           <div className="note">
             <strong>¿Primera vez aquí?</strong>
             <p>
-              Solicita una cuenta al administrador de Hydra. El backend actual
-              usa API keys; todavía no ofrece acceso con contraseña ni
-              recuperación de cuentas desde la web.
+              Solicita acceso al administrador de tu organización. Cada cuenta
+              utiliza su propia API key.
             </p>
           </div>
+          <Link href="/" className="text-link">
+            ← Conocer Hydra
+          </Link>
         </section>
       </main>
     </MotionProvider>

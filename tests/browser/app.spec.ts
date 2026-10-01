@@ -16,13 +16,19 @@ test("protected routes, login, session cookie and logout", async ({
   await expect(page).toHaveURL("/login");
   await login(page);
   await expect(page.getByText("PRO", { exact: true })).toBeVisible();
-  const c = (await context.cookies()).find((c) => c.name === "hydra_session");
+  const c = (await context.cookies()).find(
+    (c) => c.name === "__Host-hydra_session",
+  );
   expect(c?.httpOnly).toBe(true);
   expect(c?.secure).toBe(true);
   expect(c?.sameSite).toBe("Strict");
+  expect(c?.path).toBe("/");
   expect(await page.evaluate(() => localStorage.length)).toBe(0);
   await page.getByRole("button", { name: "Cerrar sesión" }).click();
   await expect(page).toHaveURL("/login");
+  expect(
+    (await context.cookies()).some((c) => c.name === "__Host-hydra_session"),
+  ).toBe(false);
 });
 test("domain instructions and explicit scan authorization", async ({
   page,
